@@ -1,0 +1,43 @@
+.{
+    .name = .freegnm_examples,
+    .version = "0.1.0",
+    .fingerprint = 0xfa7b07f0a940244d,
+    .minimum_zig_version = "0.17.0-dev.1387+01b60634c",
+    .dependencies = .{
+        .cglm = .{
+            .url = "https://github.com/recp/cglm/archive/refs/tags/v0.9.6.tar.gz",
+            .hash = "N-V-__8AAGApJACv6OGRSLZEdwbH9P68sV3B96LAZsZ21_4C",
+        },
+        .freegnm = .{
+            .url = "git+https://github.com/lateleite/freegnm.git#d0fe672b7f013f2bcbcc70ba234fbbd29ac0f32a",
+            .hash = "freegnm-0.1.0-zGkH591YIwAIl8eTD7NxzmcDqGHyMCAO3Nj4367B6QXG",
+        },
+        .open_orbis_zig = .{
+            .url = "git+https://github.com/lateleite/open-orbis-zig.git#68782e34f6598eb0a27056126fcbfa043ecb8747",
+            .hash = "open_orbis_zig-0.1.0-OC-BH646DgDfLRIwIL3UTTNopu1-1uGuBaIRnYLGY8-Y",
+        },
+        .orbpack = .{
+            .url = "git+https://github.com/lateleite/orbpack.git#e364b028599043814ad3504930d986e9e31245ba",
+            .hash = "orbpack-0.0.1-_uYG8ZT0AAAvWFzb3k-oDd_a5OK9kjiwo99ADJlGmfwI",
+        },
+        .psbc = .{
+            .url = "git+https://github.com/lateleite/psbc.git#535a952801c3364096cb7fd4763f921fc9d3dd7b",
+            .hash = "psbc-0.1.0-QiKImR0xTgBuFo30U11H0jIw4Xqbq985iGUOg4MseI5i",
+        },
+        .zalgebra = .{
+            .url = "git+https://github.com/ARandomOSDever/zalgebra#remove-arraymult-operator",
+            .hash = "zalgebra-0.0.0-aaiVSoJ_AQDgEsoyVmT_D1axo4mo6YAhTc30sqzTUeIP",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "assets",
+        "cube",
+        "indirect",
+        "instances",
+        "gltf",
+        "shared",
+        "triangle",
+    },
+}

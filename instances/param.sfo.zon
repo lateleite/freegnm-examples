@@ -1,0 +1,13 @@
+.{
+    .title = "FreeGNM Instances Sample",
+    .title_id = "FGNM00004",
+    .content_id = "IV0000-FGNM00004_00-INSTANCES0000000",
+    .app_type = 1,
+    .app_ver = "1.00",
+    .version = "1.00",
+
+    .attribute = 0,
+    .category = "gd",
+    .download_data_size = 0,
+    .system_ver = 0,
+}
