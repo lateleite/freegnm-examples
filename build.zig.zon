@@ -13,8 +13,8 @@
             .hash = "freegnm-0.1.0-zGkH591YIwAIl8eTD7NxzmcDqGHyMCAO3Nj4367B6QXG",
         },
         .open_orbis_zig = .{
-            .url = "git+https://github.com/lateleite/open-orbis-zig.git#9705ca9a830f1d05273b3a1562725a61613947c8",
-            .hash = "open_orbis_zig-0.1.0-OC-BHyDDDgBlvqh_VfBUeEaiSyH_EQ2jb21KLv1ljZaD",
+            .url = "git+https://github.com/lateleite/open-orbis-zig.git#b810be65885b61b4328aa868e930fef7403b4105",
+            .hash = "open_orbis_zig-0.1.0-OC-BH3w9DwCr534-81aYb2L5wXDs7WhiN5DoYx11br4l",
         },
         .orbpack = .{
             .url = "git+https://github.com/lateleite/orbpack.git#1c7f2768dcda7a493d647be12eef8b952b9977bb",

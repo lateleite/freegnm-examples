@@ -94,6 +94,13 @@ pub fn build(b: *std.Build) !void {
     const sh_clear_frag = compilePsb(b, exe_psbc, "clear", .fragment);
 
     //
+    // rights menu module and required game libraries' stubs
+    //
+    const lib_right = orbis.buildPrxRight(b, dep_orbis, target);
+    const stub_libc = orbis.buildPrxLibcStub(b, dep_orbis, target);
+    const stub_fios2 = orbis.buildPrxFios2Stub(b, dep_orbis, target);
+
+    //
     // adding all samples
     //
 
@@ -244,10 +251,15 @@ pub fn build(b: *std.Build) !void {
 
     const ctx: BuildSampleContext = .{
         .b = b,
+
         .dep_cglm = dep_cglm,
         .dep_orbis = dep_orbis,
         .lib_musl = lib_musl,
         .lib_gnm = lib_gnm,
+
+        .lib_right = lib_right,
+        .stub_fios2 = stub_fios2,
+        .stub_c = stub_libc,
     };
 
     try buildSample(ctx, exe_triangle, b.path("triangle"), "IV0000-FGNM00000_00-TRIANGLESAMPLE00", assets_triangle);
@@ -287,10 +299,15 @@ const C_FLAGS: []const []const u8 = &.{
 
 const BuildSampleContext = struct {
     b: *std.Build,
+
     dep_cglm: *std.Build.Dependency,
     dep_orbis: *std.Build.Dependency,
     lib_musl: *std.Build.Step.Compile,
     lib_gnm: *std.Build.Step.Compile,
+
+    lib_right: std.Build.LazyPath,
+    stub_fios2: std.Build.LazyPath,
+    stub_c: std.Build.LazyPath,
 };
 
 fn buildSample(
@@ -358,10 +375,10 @@ fn buildSample(
     const BASE_ASSETS: []const orbis.Asset = &.{
         .{ .source = eboot_file, .target_path = "eboot.bin" },
         .{ .source = sfo_file, .target_path = "sce_sys/param.sfo" },
-        .{ .source = b.path("assets/sce_module/libSceFios2.prx"), .target_path = "sce_module/libSceFios2.prx" },
-        .{ .source = b.path("assets/sce_module/libc.prx"), .target_path = "sce_module/libc.prx" },
-        .{ .source = b.path("assets/sce_sys/about/right.sprx"), .target_path = "sce_sys/about/right.sprx" },
-        .{ .source = b.path("assets/sce_sys/icon0.png"), .target_path = "sce_sys/icon0.png" },
+        .{ .source = ctx.stub_fios2, .target_path = "sce_module/libSceFios2.prx" },
+        .{ .source = ctx.stub_c, .target_path = "sce_module/libc.prx" },
+        .{ .source = ctx.lib_right, .target_path = "sce_sys/about/right.sprx" },
+        .{ .source = b.path("assets/app_icon.png"), .target_path = "sce_sys/icon0.png" },
     };
 
     const all_assets = try b.allocator.alloc(orbis.Asset, BASE_ASSETS.len + pkg_assets.len);
