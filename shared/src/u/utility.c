@@ -6,17 +6,19 @@
 #include <stdlib.h>
 
 _Noreturn void fatal(const char* msg) {
-	puts(msg);
+	fputs(msg, stderr);
+	fflush(stderr);
 	exit(EXIT_FAILURE);
 }
 
 _Noreturn void fatalf(const char* fmt, ...) {
 	va_list ap;
 	va_start(ap, fmt);
-	vprintf(fmt, ap);
+	vfprintf(stderr, fmt, ap);
 	va_end(ap);
 
-	putc('\n', stdout);
+	putc('\n', stderr);
+	fflush(stderr);
 
 	exit(EXIT_FAILURE);
 }
