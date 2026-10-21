@@ -1,0 +1,14 @@
+---
+BasedOnStyle: Chromium
+AlignAfterOpenBracket: BlockIndent
+AllowAllParametersOfDeclarationOnNextLine: true
+BinPackArguments: true
+BinPackParameters: true
+BreakBeforeBraces: Attach
+ColumnLimit: 80
+IndentCaseLabels: false
+NamespaceIndentation: Inner
+UseTab: Always
+IndentWidth: 4
+TabWidth: 4
+...
