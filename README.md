@@ -4,6 +4,8 @@ This repository holds demonstrations on how to use [freegnm](https://github.com/
 
 These samples are meant to be quick and easy to understand.
 
+Want to use the old C examples instead? [Use the 'c' branch](https://github.com/lateleite/freegnm-examples/tree/c)
+
 **CAVEATS:**
 
 - Shader binaries compiled with psbc do not have any reflection information, at least for now.
