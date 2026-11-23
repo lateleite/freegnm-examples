@@ -32,17 +32,17 @@ R_Font2D r_LoadFontFromFile(
 	free(data);
 
 	const GnmTextureCreateInfo ci = {
-		.texturetype = GNM_TEXTURE_2D,
+		.texture_type = GNM_TEXTURE_2D,
 		.width = bmwidth,
 		.height = bmheight,
 		.depth = 1,
 		.pitch = bmwidth,
-		.nummiplevels = 1,
-		.numslices = 1,
+		.num_mip_levels = 1,
+		.num_slices = 1,
 		.format = bmfmt,
-		.tilemodehint = GNM_TM_DISPLAY_LINEAR_GENERAL,
-		.mingpumode = GNM_GPU_BASE,
-		.numfragments = 1,
+		.tile_mode_hint = GNM_TM_DISPLAY_LINEAR_GENERAL,
+		.min_gpu_mode = GNM_GPU_BASE,
+		.num_fragments = 1,
 	};
 	GnmError gerr = gnmCreateTexture(&newfont.bitmaptexture, &ci);
 	if (gerr != GNM_ERROR_OK) {

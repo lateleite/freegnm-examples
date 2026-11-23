@@ -19,7 +19,7 @@ bool initcolortarget(
 	GnmRenderTarget* fbtarget, MemoryAllocator* garlicmem, uint32_t width,
 	uint32_t height, GnmDataFormat colorfmt, GnmGpuMode gpumode
 ) {
-	const uint32_t colorbpp = gnmDfGetBitsPerElement(colorfmt);
+	const uint32_t colorbpp = gnmGetBitsPerElement(colorfmt.surfacefmt);
 	const uint32_t numfragsperpixel = 1;
 	GpaSurfaceProperties surfprops = {0};
 	GpaError err = gpaFindOptimalSurface(
@@ -35,13 +35,13 @@ bool initcolortarget(
 		.width = width,
 		.height = height,
 		.pitch = 0,
-		.numslices = 1,
+		.num_slices = 1,
 
-		.colorfmt = colorfmt,
-		.colortilemodehint = surfprops.tilemode,
-		.mingpumode = gpumode,
-		.numsamples = 1,
-		.numfragments = 1,
+		.color_fmt = colorfmt,
+		.color_tile_mode_hint = surfprops.tile_mode,
+		.min_gpu_mode = gpumode,
+		.num_samples = 1,
+		.num_fragments = 1,
 	};
 	GnmError gnmerr = gnmCreateRenderTarget(fbtarget, &ci);
 	if (gnmerr != GNM_ERROR_OK) {
@@ -78,7 +78,7 @@ bool initdepthtarget(
 											 : GPA_SURFACE_DEPTH;
 
 	const GnmDataFormat depthfmt = gnmDfInitFromZ(zfmt);
-	const uint32_t depthbpp = gnmDfGetBitsPerElement(depthfmt);
+	const uint32_t depthbpp = gnmGetBitsPerElement(depthfmt.surfacefmt);
 	GpaSurfaceProperties surfprops = {0};
 	GpaError err = gpaFindOptimalSurface(
 		&surfprops, depthsurftype, depthbpp, numfrags, false, mingpumode
@@ -92,13 +92,13 @@ bool initdepthtarget(
 		.width = width,
 		.height = height,
 		.pitch = pitch,
-		.numslices = numslices,
+		.num_slices = numslices,
 
-		.zfmt = zfmt,
-		.stencilfmt = stencilfmt,
-		.tilemodehint = surfprops.tilemode,
-		.mingpumode = mingpumode,
-		.numfragments = numfrags,
+		.z_format = zfmt,
+		.stencil_format = stencilfmt,
+		.tile_mode_hint = surfprops.tile_mode,
+		.min_gpu_mode = mingpumode,
+		.num_fragments = numfrags,
 	};
 	GnmError gerr = gnmCreateDepthRenderTarget(outdrt, &ci);
 	if (gerr != GNM_ERROR_OK) {
@@ -382,7 +382,7 @@ bool loadgnftexture(
 
 	*outtexture = contents->textures[0];
 	gnmTexSetBaseAddress(outtexture, texmem);
-	outtexture->metadataaddr = 0;
+	outtexture->metadata_addr = 0;
 
 	free(data);
 	return true;
@@ -418,17 +418,17 @@ bool loadlineartexturefile(
 	free(data);
 
 	const GnmTextureCreateInfo ci = {
-		.texturetype = GNM_TEXTURE_2D,
+		.texture_type = GNM_TEXTURE_2D,
 		.width = width,
 		.height = height,
 		.depth = 1,
 		.pitch = width,
-		.nummiplevels = 1,
-		.numslices = 1,
+		.num_mip_levels = 1,
+		.num_slices = 1,
 		.format = fmt,
-		.tilemodehint = GNM_TM_DISPLAY_LINEAR_GENERAL,
-		.mingpumode = GNM_GPU_BASE,
-		.numfragments = 1,
+		.tile_mode_hint = GNM_TM_DISPLAY_LINEAR_GENERAL,
+		.min_gpu_mode = GNM_GPU_BASE,
+		.num_fragments = 1,
 	};
 	GnmError gerr = gnmCreateTexture(outtexture, &ci);
 	if (gerr != GNM_ERROR_OK) {
@@ -473,17 +473,17 @@ bool loadlineartexturemem(
 	free(data);
 
 	const GnmTextureCreateInfo ci = {
-		.texturetype = GNM_TEXTURE_2D,
+		.texture_type = GNM_TEXTURE_2D,
 		.width = width,
 		.height = height,
 		.depth = 1,
 		.pitch = width,
-		.nummiplevels = 1,
-		.numslices = 1,
+		.num_mip_levels = 1,
+		.num_slices = 1,
 		.format = fmt,
-		.tilemodehint = GNM_TM_DISPLAY_LINEAR_GENERAL,
-		.mingpumode = GNM_GPU_BASE,
-		.numfragments = 1,
+		.tile_mode_hint = GNM_TM_DISPLAY_LINEAR_GENERAL,
+		.min_gpu_mode = GNM_GPU_BASE,
+		.num_fragments = 1,
 	};
 	GnmError gerr = gnmCreateTexture(outtexture, &ci);
 	if (gerr != GNM_ERROR_OK) {

@@ -190,7 +190,7 @@ int main(void) {
 		pass_ui_end(&cmdbuf, &fbtargets[curfb]);
 
 		gnmDrawCmdEventWriteEop(
-			&cmdbuf, GNM_CACHE_FLUSH_TS, (uint64_t)label,
+			&cmdbuf, GNM_EVENT_CACHE_FLUSH_TS, (uint64_t)label,
 			GNM_DATA_SEL_SEND_DATA64, 2
 		);
 

@@ -161,11 +161,11 @@ int main(void) {
 		// the color render target shows tear when playing this sample.
 		// is that even the issue?
 		gnmDrawCmdEventWriteEop(
-			&cmdbuf, GNM_CACHE_FLUSH_AND_INV_TS_EVENT, (uint64_t)label,
+			&cmdbuf, GNM_EVENT_CACHE_FLUSH_AND_INV_TS_EVENT, (uint64_t)label,
 			GNM_DATA_SEL_SEND_DATA64, 1
 		);
-		gnmDrawCmdWaitMem(
-			&cmdbuf, GNM_WAIT_REG_MEM_FUNC_EQUAL, (uint64_t)label, 1, 0xffffffff
+		gnmDrawCmdWaitOnAddress(
+			&cmdbuf, GNM_WAIT_OP_EQUAL, (uint64_t)label, 1, 0xffffffff
 		);
 		gnmDrawCmdWaitGraphicsWrite(
 			&cmdbuf, GNM_WAIT_TARGET_CB0 | GNM_WAIT_TARGET_DB
@@ -204,7 +204,7 @@ int main(void) {
 		pass_ui_end(&cmdbuf, &fbtargets[curfb]);
 
 		gnmDrawCmdEventWriteEop(
-			&cmdbuf, GNM_CACHE_FLUSH_TS, (uint64_t)label,
+			&cmdbuf, GNM_EVENT_CACHE_FLUSH_TS, (uint64_t)label,
 			GNM_DATA_SEL_SEND_DATA64, 2
 		);
 
@@ -220,9 +220,9 @@ int main(void) {
 
 		clock_gettime(CLOCK_MONOTONIC, &timeend);
 		struct timespec timediff = difftimespec(timestart, timeend);
-		frametime = timediff.tv_sec +
-					((float)timediff.tv_nsec / (1000.0 * 1000.0 * 1000.0)
-					);	// nano to seconds
+		frametime =
+			timediff.tv_sec + ((float)timediff.tv_nsec /
+							   (1000.0 * 1000.0 * 1000.0));	 // nano to seconds
 
 		if (!displayctx_flip(&display, curfb)) {
 			puts("displayflip failed");

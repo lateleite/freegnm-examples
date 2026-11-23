@@ -92,7 +92,7 @@ void pass_model_init(
 	s_mpass.sampler = (GnmSampler){
 		.xyminfilter = GNM_FILTER_BILINEAR,
 		.xymagfilter = GNM_FILTER_BILINEAR,
-		.mipfilter = GNM_MIPFILTER_LINEAR,
+		.mipfilter = GNM_MIP_LINEAR,
 		.zfilter = GNM_ZFILTER_POINT,
 		.minlod = 0,
 		.maxlod = 0xfff,

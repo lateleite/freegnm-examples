@@ -113,7 +113,7 @@ void pass_ui_init(
 	s_ui.fontsampler = (GnmSampler){
 		.xyminfilter = GNM_FILTER_POINT,
 		.xymagfilter = GNM_FILTER_POINT,
-		.mipfilter = GNM_MIPFILTER_POINT,
+		.mipfilter = GNM_MIP_POINT,
 		.zfilter = GNM_ZFILTER_POINT,
 		.minlod = 0,
 		.maxlod = 0xfff,

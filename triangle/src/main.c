@@ -120,8 +120,8 @@ int main(void) {
 	}
 
 	gnmDrawCmdEventWriteEop(
-		&cmdbuf, GNM_CACHE_FLUSH_TS, (uint64_t)label, GNM_DATA_SEL_SEND_DATA64,
-		1
+		&cmdbuf, GNM_EVENT_CACHE_FLUSH_TS, (uint64_t)label,
+		GNM_DATA_SEL_SEND_DATA64, 1
 	);
 
 	void* dcbaddr = cmdbuf.buffer;

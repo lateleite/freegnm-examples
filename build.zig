@@ -62,6 +62,7 @@ pub fn build(b: *std.Build) !void {
     // const mod_orbis = dep_orbis.module("orbis");
     const lib_musl = dep_orbis.artifact("musl");
     const wf_syslibs = dep_orbis.namedWriteFiles("sys_libs");
+    const obj_crt_exe = dep_orbis.artifact("crt_exe");
 
     const dep_psbc = b.dependency("psbc", .{
         .target = native_target,
@@ -256,6 +257,7 @@ pub fn build(b: *std.Build) !void {
         .dep_orbis = dep_orbis,
         .lib_musl = lib_musl,
         .lib_gnm = lib_gnm,
+        .obj_crt_exe = obj_crt_exe,
 
         .lib_right = lib_right,
         .stub_fios2 = stub_fios2,
@@ -304,6 +306,7 @@ const BuildSampleContext = struct {
     dep_orbis: *std.Build.Dependency,
     lib_musl: *std.Build.Step.Compile,
     lib_gnm: *std.Build.Step.Compile,
+    obj_crt_exe: *std.Build.Step.Compile,
 
     lib_right: std.Build.LazyPath,
     stub_fios2: std.Build.LazyPath,
@@ -322,6 +325,7 @@ fn buildSample(
     const dep_orbis = ctx.dep_orbis;
     const lib_musl = ctx.lib_musl;
     const lib_gnm = ctx.lib_gnm;
+    const obj_crt_exe = ctx.obj_crt_exe;
 
     // add program
     exe.root_module.addCSourceFiles(.{
@@ -350,6 +354,7 @@ fn buildSample(
 
     // add OpenOrbis' libc
     exe.root_module.linkLibrary(lib_musl);
+    exe.root_module.addObject(obj_crt_exe);
     exe.setLinkerScript(dep_orbis.path("link.x"));
 
     // system libraries and freegnm

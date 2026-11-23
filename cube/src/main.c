@@ -175,7 +175,7 @@ int main(void) {
 	const GnmSampler sampler = {
 		.xyminfilter = GNM_FILTER_BILINEAR,
 		.xymagfilter = GNM_FILTER_BILINEAR,
-		.mipfilter = GNM_MIPFILTER_LINEAR,
+		.mipfilter = GNM_MIP_LINEAR,
 		.zfilter = GNM_ZFILTER_POINT,
 		.minlod = 0,
 		.maxlod = 0xfff,
@@ -380,7 +380,7 @@ int main(void) {
 
 		// write label when all commands are done
 		gnmDrawCmdEventWriteEop(
-			&cmdbuf, GNM_CACHE_FLUSH_TS, (uint64_t)label,
+			&cmdbuf, GNM_EVENT_CACHE_FLUSH_TS, (uint64_t)label,
 			GNM_DATA_SEL_SEND_DATA64, 1
 		);
 
